@@ -1,0 +1,26 @@
+$bg-color: #FCE4EC;
+$text-color: darken(#b71c1c, 12%);
+
+body {
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+.mod-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
+.login-girl {
+  width: 200px;
+}
+
+.pure-alert {
+  border: 1px solid $text-color;
+  background-color: #ffcdd2;
+  color: $text-color;
+}

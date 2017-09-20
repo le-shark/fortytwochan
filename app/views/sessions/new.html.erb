@@ -1,0 +1,19 @@
+<%= provide(:title, "Moderator login") %>
+<%= provide(:flash, "no") %>
+
+<div class="pure-form-stacked mod-login">
+  <%= image_tag "login_girl.png", class: "login-girl" %>
+  <% flash.each do |type, msg| %>
+    <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
+  <% end %>
+  <%= form_for(:session, url: mod_login_path) do |f| %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.submit "Log in", class: "btn btn-primary" %>
+  <% end %>
+</div>
