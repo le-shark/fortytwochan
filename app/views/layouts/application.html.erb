@@ -9,11 +9,11 @@
   </head>
 
   <body>
-    <% if !(yield(:flash) == 'no') %>
-      <% flash.each do |type, msg| %>
-        <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
-      <% end %>
+  <% if !(yield(:flash) == 'no') %>
+    <% flash.each do |type, msg| %>
+      <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
     <% end %>
-    <%= yield %>
+  <% end %>
+  <%= yield %>
   </body>
 </html>

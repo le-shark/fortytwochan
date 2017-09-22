@@ -18,5 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    flash[:info] = "See you!"
+    log_out if logged_in?
+    redirect_back(fallback_location: root_path)
   end
 end

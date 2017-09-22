@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
+    @boards = Board.all
   end
 
   def control_panel
