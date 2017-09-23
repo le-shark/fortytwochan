@@ -1,0 +1,34 @@
+<%# TODO: boards list %>
+
+<div class="board-container">
+  <div class="board-title">
+    <center>
+      <h2>/<%= @board.name %>/ - <%= @board.title %></h2>
+    </center>
+  </div>
+
+  <div class="threads">
+    <% @posts.threads.reverse.each do |thread| %>
+        <div class="thread-preview">
+          <p>
+            <h4 class="thread-title"><%= thread.title %></h4>
+            <span class="thread-time"><%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= thread.id %></span>
+          </p>
+          <div class="thread-text">
+            <p><%= thread.text %></p>
+          </div>
+          <p>replies</p>
+          <% thread.replies.where.not("id = thread_id").last(3).each do |reply| %>
+            <p>reply: <%= reply.text %></p>
+          <% end %>
+        </div>
+    <% end %>
+    <hr>
+  </div>
+</div>
+
+<%= form_for [@board, Post.new], html: { class: "pure-form-stacked" } do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :text, class: "pure-input-1-2" %><br/>
+  <%= f.submit "create thread" %>
+<% end %>

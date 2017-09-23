@@ -10,4 +10,5 @@ class Post < ApplicationRecord
   def thread?
     id == thread_id
   end
+
 end

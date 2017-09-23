@@ -63,3 +63,24 @@ body {
     color: #f44336;
   }
 }
+
+.board-container {
+  flex-direction: column;
+  display: flex;
+}
+
+.threads {
+  padding: 10px;
+}
+
+.thread-title {
+  display: inline;
+}
+
+.thread-time {
+  font-size: small;
+}
+
+.thread-text {
+  padding: 0 10px;
+}
