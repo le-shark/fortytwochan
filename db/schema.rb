@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920181041) do
+ActiveRecord::Schema.define(version: 20170922205510) do
 
   create_table "boards", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 20170920181041) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "post_type"
+    t.string "ip"
+    t.integer "thread_id"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "board_id"
   end
 
   create_table "users", force: :cascade do |t|
