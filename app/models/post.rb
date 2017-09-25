@@ -7,6 +7,13 @@ class Post < ApplicationRecord
 
   scope :threads, -> { where("id = thread_id") }
 
+  mount_uploaders :pictures, PictureUploader
+  serialize :pictures, JSON
+
+  validates :text, presence: true
+  validates :pictures, presence: true, if: :thread?
+  validates :title, presence: true, if: :thread?
+
   def thread?
     id == thread_id
   end

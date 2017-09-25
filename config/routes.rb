@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/:id(.:format)', to: 'boards#show', as: :board
 
   resources :boards, except: :show do
-    resources :posts
+    resources :posts, except: :show
   end
+  get '/:board_id/thread/:id(.:format)', to: 'posts#show', as: :post
+
+  post '/:board_id/thread/:id(.:format)', to: 'posts#create', as: :reply
 end

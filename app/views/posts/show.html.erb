@@ -1,0 +1,36 @@
+<div class="board-container">
+  <div class="board-title">
+    <center>
+      <h2>
+        <%= link_to @board do %>
+          /<%= @board.name %>/ - <%= @board.title %>
+        <% end %>
+      </h2>
+    </center>
+  </div>
+
+  <div class="threads">
+    <hr>
+    <%= render "thread", thread: @post %>
+    <hr>
+  </div>
+
+  <%= form_for [Post.new], url: reply_path, html: { class: "pure-form-stacked" } do |f| %>
+    <%= f.hidden_field :reply, value: "1" %>
+    <%= f.text_area :text, class: "pure-input-1-2" %>
+    <%= f.file_field :pictures, multiple: true %>
+    <%= f.submit "reply" %>
+  <% end %>
+</div>
+
+<% content_for :javascript do %>
+  <script>
+    document.querySelectorAll('.post-pic-thumb').forEach((el) => {
+      el.addEventListener('click', () => {
+        el.classList.toggle('post-pic-thumb-full')
+        var top = $(el).parent().position().top;
+        $(window).scrollTop( top );
+      })
+    })
+  </script>
+<% end %>

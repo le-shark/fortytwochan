@@ -1,0 +1,36 @@
+<div class="thread-preview">
+  <% if thread.pictures.size > 0 %>
+    <div class="post-pics">
+      <% thread.pictures.each do |pic| %>
+        <div class="post-pic">
+          <p>
+            <%= link_to pic.url do %>
+              <%= truncate File.basename(pic.url, ".*"), length: 20,
+              omission: "[...]" %><%= File.extname(pic.url) %>
+            <% end %>
+          </p>
+          <p class="file-size"><%= number_to_human_size(pic.size) %></p>
+          <%= image_tag pic.url, class: "post-pic-thumb" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <p>
+    <h4 class="thread-title"><%= thread.title %></h4>
+    <span class="thread-time">Anonymous <%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= thread.id %> [<%= link_to "Reply", post_path(@board, thread) %>]</span>
+  </p>
+  <div class="thread-text">
+    <p><%= thread.text %></p>
+  </div>
+  <% if params[:controller] == "posts" %>
+    <% thread.replies.where.not("id = thread_id").each do |reply| %>
+      <%= render "reply", reply: reply %>
+      <br>
+    <% end %>
+  <% else %>
+    <% thread.replies.where.not("id = thread_id").last(3).each do |reply| %>
+      <%= render "reply", reply: reply %>
+      <br>
+    <% end %>
+  <% end %>
+</div>

@@ -15,5 +15,9 @@
     <% end %>
   <% end %>
   <%= yield %>
+  <%= yield :javascript %>
+  <script>
+    console.log(he.decode(`<%= params %>`));
+  </script>
   </body>
 </html>
