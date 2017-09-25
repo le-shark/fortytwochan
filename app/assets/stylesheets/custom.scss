@@ -138,6 +138,7 @@ body {
   border: 1px solid #FFAB91;
   margin-bottom: 5px;
   padding: 5px;
+  min-width: 35%;
 }
 
 .reply-header {
@@ -150,4 +151,19 @@ body {
 
 hr {
   color: #FF7043;
+}
+
+.thread-title-p {
+  overflow: auto;
+}
+
+.pure-form {
+  margin-bottom: 20px;
+  textarea, input[type="text"] {
+    border-radius: 0;
+    border: 1px solid gray;
+    &:focus {
+      border-color: $text-color;
+    }
+  }
 }

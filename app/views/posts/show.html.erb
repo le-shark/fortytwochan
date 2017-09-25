@@ -13,14 +13,15 @@
     <hr>
     <%= render "thread", thread: @post %>
     <hr>
+    <div class="thread-form">
+      <%= form_for [Post.new], url: reply_path, html: { class: "pure-form pure-form-stacked" } do |f| %>
+        <%= f.hidden_field :reply, value: "1" %>
+        <%= f.text_area :text, class: "pure-input-1-2", placeholder: 'comment' %>
+        <%= f.file_field :pictures, multiple: true %>
+        <%= f.submit "reply" %>
+      <% end %>
+    </div>
   </div>
-
-  <%= form_for [Post.new], url: reply_path, html: { class: "pure-form-stacked" } do |f| %>
-    <%= f.hidden_field :reply, value: "1" %>
-    <%= f.text_area :text, class: "pure-input-1-2" %>
-    <%= f.file_field :pictures, multiple: true %>
-    <%= f.submit "reply" %>
-  <% end %>
 </div>
 
 <% content_for :javascript do %>

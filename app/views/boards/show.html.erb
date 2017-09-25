@@ -13,16 +13,17 @@
       <%= render "thread", thread: thread %>
       <hr>
     <% end %>
+
+    <%= form_for [@board, Post.new], html: { class: "pure-form pure-form-stacked" } do |f| %>
+      <%= f.text_field :title, placeholder: 'thread title' %>
+      <%= f.hidden_field :reply, value: "1" %>
+      <%= f.text_area :text, class: "pure-input-1-2", placeholder: 'text' %>
+      <%= f.file_field :pictures, multiple: true %>
+      <%= f.submit "create thread" %>
+    <% end %>
   </div>
 </div>
 
-<%= form_for [@board, Post.new], html: { class: "pure-form-stacked" } do |f| %>
-  <%= f.text_field :title %>
-  <%= f.hidden_field :reply, value: "1" %>
-  <%= f.text_area :text, class: "pure-input-1-2" %>
-  <%= f.file_field :pictures, multiple: true %>
-  <%= f.submit "create thread" %>
-<% end %>
 
 <% content_for :javascript do %>
   <script>
