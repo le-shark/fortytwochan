@@ -4,23 +4,19 @@
       Anonymous <%= reply.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= reply.id %>
     </span>
   </p>
-  <% if reply.pictures.size > 0 %>
-    <div class="post-pics">
-      <% reply.pictures.each do |pic| %>
-        <div class="post-pic">
-          <p>
-            <%= link_to pic.url do %>
-              <%= truncate File.basename(pic.url, ".*"), length: 20,
-              omission: "[...]" %><%= File.extname(pic.url) %>
-            <% end %>
-          </p>
-          <p class="file-size"><%= number_to_human_size(pic.size) %></p>
-          <%= image_tag pic.url, class: "post-pic-thumb" %>
-        </div>
-      <% end %>
+  <% if reply.picture.exists? %>
+  <div class="post-pics">
+    <div class="post-pic">
+      <p>
+        <%= link_to reply.picture.url do %>
+          <%= truncate File.basename(reply.picture.url, ".*"), length: 20,
+          omission: "[...]" %><%= File.extname(reply.picture.original_filename) %>
+        <% end %>
+      </p>
+      <p class="file-size"><%= number_to_human_size(reply.picture.size) %></p>
+      <%= image_tag reply.picture.url, class: "post-pic-thumb" %>
     </div>
-  <% end %>
-  <% if reply.pictures.any? %>
+  </div>
     <br>
   <% end %>
   <p class="reply-text"><%= simple_format reply.text %></p>

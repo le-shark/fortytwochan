@@ -17,7 +17,7 @@
       <%= form_for [Post.new], url: reply_path, html: { class: "pure-form pure-form-stacked" } do |f| %>
         <%= f.hidden_field :reply, value: "1" %>
         <%= f.text_area :text, class: "pure-input-1-2", placeholder: 'comment' %>
-        <%= f.file_field :pictures, multiple: true %>
+        <%= f.file_field :picture %>
         <%= f.submit "reply" %>
       <% end %>
     </div>

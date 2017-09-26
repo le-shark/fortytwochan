@@ -18,7 +18,7 @@
       <%= f.text_field :title, placeholder: 'thread title' %>
       <%= f.hidden_field :reply, value: "1" %>
       <%= f.text_area :text, class: "pure-input-1-2", placeholder: 'text' %>
-      <%= f.file_field :pictures, multiple: true %>
+      <%= f.file_field :picture %>
       <%= f.submit "create thread" %>
     <% end %>
   </div>
