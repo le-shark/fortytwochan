@@ -4,16 +4,16 @@
       Anonymous <%= reply.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= reply.id %>
     </span>
   </p>
-  <% if reply.picture.exists? %>
+  <% if !reply.picture.file.nil? %>
   <div class="post-pics">
     <div class="post-pic">
       <p>
         <%= link_to reply.picture.url do %>
           <%= truncate File.basename(reply.picture.url, ".*"), length: 20,
-          omission: "[...]" %><%= File.extname(reply.picture.original_filename) %>
+          omission: "[...]" %><%= File.extname(reply.picture.filename) %>
         <% end %>
       </p>
-      <p class="file-size"><%= number_to_human_size(reply.picture.size) %></p>
+      <p class="file-size"><%= number_to_human_size(FastImage.new(reply.picture.url).content_length) %></p>
       <%= image_tag reply.picture.url, class: "post-pic-thumb" %>
     </div>
   </div>

@@ -7,12 +7,10 @@ class Post < ApplicationRecord
 
   scope :threads, -> { where("id = thread_id") }
 
-  has_attached_file :picture, storage: :imgur
-  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
-
+  mount_uploader :picture, PictureUploader
   validates :text, presence: true
-  validates :picture, attachment_presence: true, if: :thread?
   validates :title, presence: true, if: :thread?
+  validates_presence_of :picture, if: :thread?
 
   def thread?
     id == thread_id

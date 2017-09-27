@@ -2,12 +2,12 @@
   <div class="post-pics">
     <div class="post-pic">
       <p>
-        <%= link_to thread.picture.url do %>
+        <%= link_to thread.picture_url do %>
           <%= truncate File.basename(thread.picture.url, ".*"), length: 20,
-          omission: "[...]" %><%= File.extname(thread.picture.original_filename) %>
+          omission: "[...]" %><%= File.extname(thread.picture.filename) %>
         <% end %>
       </p>
-      <p class="file-size"><%= number_to_human_size(thread.picture.size) %></p>
+      <p class="file-size"><%= number_to_human_size(FastImage.new(thread.picture.url).content_length) %></p>
       <%= image_tag thread.picture.url, class: "post-pic-thumb" %>
     </div>
   </div>
