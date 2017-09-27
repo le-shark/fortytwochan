@@ -7,10 +7,7 @@ class Post < ApplicationRecord
 
   scope :threads, -> { where("id = thread_id") }
 
-  has_attached_file :picture, {
-    url: "/system/:attachment/:hash.:extension",
-    hash_secret: "eb696c8538ef93e1ea688b3447432893759c43881683e6bb33b50b1eb1f40691615948ce94396d4da7a4fd55ed4b5315f9c15bb36e91b8e940f40887cdb06de8"
-}
+  has_attached_file :picture, storage: :imgur
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
 
   validates :text, presence: true

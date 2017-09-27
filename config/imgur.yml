@@ -1,5 +1,5 @@
-client_id: 'CLIENT_ID'
-client_secret: 'CLIENT_SECRET'
-access_token: 'ACCESS_TOKEN'
-refresh_token: 'REFRESH_TOKEN'
+client_id: 744cabf02266387
+client_secret: 133e7b7762af1dcd270c5666664175f32213d706
+access_token: fd6bfd8b2bde076be63eaed33b8449a3404be54c
+refresh_token: d09e59eaae2c8fd65959a06e0f87d67f994c93af
 use_ssl: false

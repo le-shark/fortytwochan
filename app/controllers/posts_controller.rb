@@ -12,6 +12,8 @@ class PostsController < ApplicationController
       @reply.thread = @post
       @reply.ip = request.remote_ip
       if @reply.save
+        @post.bumped_at = Time.now
+        @post.save
         redirect_to post_path(@board, @post)
       else
         redirect_to request.referer, notice: "Well, something went wrong"
@@ -20,6 +22,7 @@ class PostsController < ApplicationController
       @post = @board.posts.new post_params
       @post.thread = @post
       @post.ip = request.remote_ip
+      @post.bumped_at = Time.now
       if @post.save
         redirect_to @board
       else
