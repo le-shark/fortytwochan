@@ -6,6 +6,11 @@ body {
   color: $text-color;
 }
 
+p {
+  margin: 0;
+  overflow: auto;
+}
+
 .mod-login {
   display: flex;
   align-items: center;
@@ -23,6 +28,9 @@ body {
   border: 1px solid $text-color;
   background-color: #ffcdd2;
   color: $text-color;
+  margin-top: 10px;
+  width: 50%;
+  text-align: center;
 }
 
 .home-wrap {
@@ -159,11 +167,39 @@ hr {
 
 .pure-form {
   margin-bottom: 20px;
-  textarea, input[type="text"] {
+  textarea, input[type='text'], input[type="password"] {
     border-radius: 0;
     border: 1px solid gray;
     &:focus {
       border-color: $text-color;
     }
   }
+}
+
+.reply-text, .thread-text {
+  white-space: pre-wrap;
+}
+
+.quote {
+  color: #789922;
+}
+
+.spoiler {
+  background-color: darken($bg-color, 20%);
+  color: darken($bg-color, 20%);
+}
+
+.reply {
+  .spoiler {
+    background-color: darken(#FFCCBC, 20%);
+    color: darken(#FFCCBC, 20%);
+  }
+}
+
+.spoiler:hover {
+  color: $text-color;
+}
+
+.panel-container {
+  padding: 0 15px;
 }

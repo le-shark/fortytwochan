@@ -11,13 +11,88 @@
   <body>
   <% if !(yield(:flash) == 'no') %>
     <% flash.each do |type, msg| %>
-      <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
+      <center><div class="pure-alert pure-alert-<%= type %>"><%= msg %></div></center>
     <% end %>
   <% end %>
   <%= yield %>
   <%= yield :javascript %>
   <script>
     console.log(he.decode(`<%= params %>`));
+    //--------------------------------------
+    var divs = document.querySelectorAll('.reply-text, .thread-text')
+    divs.forEach((div) => {
+      var text = div.innerText.split('\n');
+      var html = "";
+      console.log(text);
+
+      text.forEach((line) => {
+        if (line === "") {
+          line = "\n";
+        }
+        if (line[0] === '>') {
+          html += '<p class="quote">' + line + '</p>';
+        } else {
+          html += '<p>' + line + '</p>';
+        }
+      });
+
+      while (html.indexOf('[b]') >= 0) {
+        var start = html.indexOf('[b]');
+        var finish = html.indexOf('[/b]', start);
+        if (finish >= 0) {
+          var word = '<b>' + html.slice(start+3, finish) + '</b>';
+          html = [html.slice(0, start), word, html.slice(finish + 4)].join('');
+        } else {
+          break;
+        }
+      }
+
+      while (html.indexOf('[i]') >= 0) {
+        var start = html.indexOf('[i]');
+        var finish = html.indexOf('[/i]', start);
+        if (finish >= 0) {
+          var word = '<i>' + html.slice(start+3, finish) + '</i>';
+          html = [html.slice(0, start), word, html.slice(finish + 4)].join('');
+        } else {
+          break;
+        }
+      }
+
+      while (html.indexOf('[s]') >= 0) {
+        var start = html.indexOf('[s]');
+        var finish = html.indexOf('[/s]', start);
+        if (finish >= 0) {
+          var word = '<s>' + html.slice(start+3, finish) + '</s>';
+          html = [html.slice(0, start), word, html.slice(finish + 4)].join('');
+        } else {
+          break;
+        }
+      }
+
+      while (html.indexOf('[u]') >= 0) {
+        var start = html.indexOf('[u]');
+        var finish = html.indexOf('[/u]', start);
+        if (finish >= 0) {
+          var word = '<u>' + html.slice(start+3, finish) + '</u>';
+          html = [html.slice(0, start), word, html.slice(finish + 4)].join('');
+        } else {
+          break;
+        }
+      }
+
+      while (html.indexOf('[spoiler]') >= 0) {
+        var start = html.indexOf('[spoiler]');
+        var finish = html.indexOf('[/spoiler]', start);
+        if (finish >= 0) {
+          var word = '<span class="spoiler">' + html.slice(start+9, finish) + '</span>';
+          html = [html.slice(0, start), word, html.slice(finish + 10)].join('');
+        } else {
+          break;
+        }
+      }
+
+      div.innerHTML = html;
+    });
   </script>
   </body>
 </html>

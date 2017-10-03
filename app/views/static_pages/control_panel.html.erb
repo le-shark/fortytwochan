@@ -1,0 +1,32 @@
+<div class="panel-container">
+  <center>
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png" %>
+    <% end %>
+  </center>
+  <hr>
+  <div class="remove-posts">
+    <p>Remove posts by IP</p>
+    <%= form_for :remove_posts, url: remove_posts_path, html: { class: "pure-form" } do |f| %>
+      <%= f.text_field :ip, placeholder: "IP" %>
+      <%= f.submit "Remove!" %>
+    <% end  %>
+  </div>
+  <div class="add-moderator">
+    <p>Add new moderator</p>
+    <%= form_for :user, url: new_user_path, html: { class: "pure-form" } do |f| %>
+      <%= f.text_field :email, placeholder: "Email" %>
+      <%= f.password_field :password, placeholder: "Password" %>
+      <%= f.password_field :password_confirmation, placeholder: "Password confirmation" %>
+      <%= f.submit "Save" %>
+    <% end  %>
+  </div>
+  <div class="add-board">
+    <p>Add new board</p>
+    <%= form_for :board, url: new_board_path, html: { class: "pure-form" } do |f| %>
+      <%= f.text_field :name, placeholder: "Name (URL)" %>
+      <%= f.text_field :title, placeholder: "Title" %>
+      <%= f.submit "Create a board!" %>
+    <% end  %>
+  </div>
+</div>

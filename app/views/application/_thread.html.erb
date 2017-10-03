@@ -13,11 +13,14 @@
   </div>
   <p class="thread-title-p">
     <h4 class="thread-title"><%= thread.title %></h4>
-    <span class="thread-time">Anonymous <%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= thread.id %> [<%= link_to "Reply", post_path(@board, thread) %>]</span>
+    <span class="thread-time">Anonymous <%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= thread.id %> [<%= link_to "Reply", post_path(@board, thread) %>]
+    <% if current_user %>
+      <%= thread.ip %>
+    <% end %>
+    </span>
   </p>
-  <div class="thread-text">
-    <p><%= simple_format thread.text %></p>
-  </div>
+  <br>
+  <div class="thread-text"><%= thread.text %></div>
   <% if params[:controller] == "posts" %>
     <% thread.replies.where.not("id = thread_id").each do |reply| %>
       <%= render "reply", reply: reply %>

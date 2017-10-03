@@ -2,6 +2,9 @@
   <p class="reply-header">
     <span class="thread-time">
       Anonymous <%= reply.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= reply.id %>
+      <% if current_user %>
+        <%= reply.ip %>
+      <% end %>
     </span>
   </p>
   <% if !reply.picture.file.nil? %>
@@ -19,5 +22,5 @@
   </div>
     <br>
   <% end %>
-  <p class="reply-text"><%= simple_format reply.text %></p>
+  <div class="reply-text"><%= reply.text %></div>
 </div>

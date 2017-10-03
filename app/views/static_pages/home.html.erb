@@ -1,7 +1,9 @@
 <%= provide(:flash, 'no') %>
 
 <div class="home-wrap">
-  <%= image_tag "logo.png" %>
+  <%= link_to root_path do %>
+    <%= image_tag "logo.png" %>
+  <% end %>
   <% flash.each do |type, msg| %>
     <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
   <% end %>
@@ -14,6 +16,7 @@
     </ul>
   </div>
   <% if logged_in? %>
+    <%= link_to "control panel", control_panel_path %>
     <%= link_to "out!", mod_logout_path, method: :delete %>
   <% end %>
 </div>
