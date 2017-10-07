@@ -23,13 +23,27 @@
     divs.forEach((div) => {
       var text = div.innerText.split('\n');
       var html = "";
-      console.log(text);
 
       text.forEach((line) => {
         if (line === "") {
           line = "\n";
         }
-        if (line[0] === '>') {
+        var lineArr = line.split(" ");
+        lineArr.forEach((word, index, arr) => {
+          var isLink = true;
+          if (word[0] == '>' && word[1] == '>') {
+            for (var i = 2; i < word.length; i++) {
+              if (isNaN(word[i])) {
+                isLink = false;
+              }
+            }
+            if (isLink) {
+              arr[index] = "<a href='#'>" + word + "</a>";
+            }
+          }
+        });
+        line = lineArr.join(' ');
+        if (line[0] === '>' && line[1] !== '>') {
           html += '<p class="quote">' + line + '</p>';
         } else {
           html += '<p>' + line + '</p>';
