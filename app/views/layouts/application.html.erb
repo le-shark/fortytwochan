@@ -19,10 +19,17 @@
   <script>
     console.log(he.decode(`<%= params %>`));
     //--------------------------------------
+    /*function insertAfter(referenceNode, newNode) {
+      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }*/
+
     var divs = document.querySelectorAll('.reply-text, .thread-text')
     divs.forEach((div) => {
+      var postId = div.parentElement.classList[1].slice(1);
       var text = div.innerText.split('\n');
       var html = "";
+      var threadId = document.getElementById("thread-id").innerText;
+      console.log(threadId);
 
       text.forEach((line) => {
         if (line === "") {
@@ -38,7 +45,25 @@
               }
             }
             if (isLink) {
-              arr[index] = "<a href='#'>" + word + "</a>";
+              if (word.slice(2) == threadId) {
+                arr[index] = "<a href='#" + word.slice(2) + "'>" + word + " (OP)</a>";
+              } else {
+                arr[index] = "<a href='#" + word.slice(2) + "'>" + word + "</a>";
+              }
+              var repliedPost = document.querySelector(".r" + word.slice(2));
+              var repliesDiv = null;
+              for (var i = 0; i < repliedPost.childNodes.length; i++) {
+                if (repliedPost.childNodes[i].className == "replies-field") {
+                  repliesDiv = repliedPost.childNodes[i];
+                  break;
+                }
+              }
+              var link = document.createElement('a');
+              link.innerHTML = "<a href='#" + postId + "'>>>" + postId + "</a> ";
+              if (repliesDiv.innerText == "") {
+                repliesDiv.innerText = "Replies: ";
+              }
+              repliesDiv.appendChild(link);
             }
           }
         });

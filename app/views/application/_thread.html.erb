@@ -1,4 +1,7 @@
-<div class="thread-preview">
+<% if params[:controller] == "posts" && params[:action] == "show" %>
+  <a id="<%= thread.id %>"></a>
+<% end %>
+<div class="thread-preview r<%= thread.id %>">
   <div class="post-pics">
     <div class="post-pic">
       <p>
@@ -13,7 +16,7 @@
   </div>
   <p class="thread-title-p">
     <h4 class="thread-title"><%= thread.title %></h4>
-    <span class="thread-time">Anonymous <%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= thread.id %> [<%= link_to "Reply", post_path(@board, thread) %>]
+    <span class="thread-time">Anonymous <%= thread.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<span id="thread-id"><%= thread.id %></span> [<%= link_to "Reply", post_path(@board, thread) %>]
     <% if current_user %>
       <%= thread.ip %>
       <%= link_to "delete", board_post_path(thread.board, thread), method: :delete %>
@@ -22,8 +25,10 @@
   </p>
   <br>
   <div class="thread-text"><%= thread.text %></div>
+  <div class="replies-field"></div>
   <% if params[:controller] == "posts" %>
     <% thread.replies.where.not("id = thread_id").each do |reply| %>
+      <a id="<%= reply.id %>"></a>
       <%= render "reply", reply: reply %>
       <br>
     <% end %>

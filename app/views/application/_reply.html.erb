@@ -1,4 +1,4 @@
-<div class="reply">
+<div class="reply r<%= reply.id %>">
   <p class="reply-header">
     <span class="thread-time">
       Anonymous <%= reply.created_at.strftime("%m/%d/%Y(%a)%H:%M:%S") %> №<%= reply.id %>
@@ -24,4 +24,5 @@
     <br>
   <% end %>
   <div class="reply-text"><%= reply.text %></div>
+  <div class="replies-field"></div>
 </div>
