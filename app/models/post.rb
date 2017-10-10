@@ -19,7 +19,7 @@ class Post < ApplicationRecord
   end
 
   def delete_picture_from_cloud_and_replies
-    if id = self.picture.file.public_id
+    if self.picture.file && id = self.picture.file.public_id
       Cloudinary::Uploader.destroy(id)
     end
     if self.thread?
